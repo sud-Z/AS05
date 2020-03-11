@@ -23,7 +23,7 @@ $sessionid = $_SESSION['player_id'];
         
         <div style="padding-top:25px;" class="row">
         <p>
-            <a href="create_disc_event.php" class="btn btn-success">Create Event</a>
+            <a href="disc_event_create.php" class="btn btn-success">Create Event</a>
             <a href="disc_player_list.php" class="btn btn-primary">View Player List</a>
         </p>
         </div>
@@ -40,8 +40,8 @@ $sessionid = $_SESSION['player_id'];
                           <th>Event Date</th>
                           <th>Event Time</th>
                           <th>Event Location</th>
+                          <th>Event Description</th>
                           <th>Host First Name</th>
-                          <th>Host Last Name</th>
                           <th>Host Email</th>
                           <th>Action</th>
                         </tr>
@@ -58,22 +58,22 @@ $sessionid = $_SESSION['player_id'];
                                 echo '<td>'. $row['disc_event_date'] . '</td>';
                                 echo '<td>'. $row['disc_event_time'] . '</td>';
                                 echo '<td>'. $row['disc_event_location'] . '</td>';
+                                echo '<td>'. $row['disc_event_description'] . '</td>';
                                 echo '<td>'. $row['fname'] . '</td>';
-                                echo '<td>'. $row['lname'] . '</td>';
                                 echo '<td>'. $row['email'] . '</td>';
                                 echo '<td width=250>';
                                 
-                                echo '<a class="btn" href="assign_read.php?id='.$row[0].'">Who is Going?</a>';
+                                echo '<a class="btn" href="disc_event_competitors.php?id='.$row[0].'">Competitors</a>';
                                 echo ' ';
                                 
                                 if($id == $row['event_creator_id']){
-                                    echo '<a class="btn btn-success" href="assign_update.php?id='.$row[0].'">Update</a>';
+                                    echo '<a class="btn btn-success" href="disc_event_update.php?id='.$row[0].'">Update</a>';
                                     echo ' ';
-                                    echo '<a class="btn btn-danger" href="assign_delete.php?id='.$row[0].'">Delete</a>';
+                                    echo '<a class="btn btn-danger" href="disc_event_delete.php?id='.$row[0].'">Delete</a>';
                                 }
                                 if($id != $row['event_creator_id'])
                                 {
-                                    echo '<a class="btn btn-primary" href="assign_read.php?id='.$row[0].'">RSVP</a>';
+                                    echo '<a class="btn btn-primary" href="disc_event_rsvp.php?id='.$row[0].'">RSVP</a>';
                                 }
                                 echo '</td>';
                                 echo '</tr>';
