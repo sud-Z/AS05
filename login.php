@@ -29,9 +29,9 @@ if ( !empty($_POST)) { // if $_POST filled then process the form
 		$sessionid = $data['id'];
 		$_SESSION['player_name'] = $data['fname'];
 		Database::disconnect();
-		header("Location: home.php?id=$sessionid");
+		header("Location: disc_event_list.php?id=$sessionid");
 		// javascript below is necessary for system to work on github
-		echo "<script type='text/javascript'> document.location = 'home.php'; </script>";
+		echo "<script type='text/javascript'> document.location = 'disc_event_list.php'; </script>";
 		exit();
 	}
 	else { // otherwise go to login error page
