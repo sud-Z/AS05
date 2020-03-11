@@ -56,12 +56,10 @@ $sessionid = $_SESSION['player_id'];
                                 echo '<td>'. $row['email'] . '</td>';
                                 echo '<td>'. $row['mobile'] . '</td>';
                                 echo '<td width=225>';
-                                echo '<a class="btn" href="read.php?id='.$row['id'].'">Read</a>';
-                                echo ' ';
                                 if($id == $row['id']){
-                                    echo '<a class="btn btn-success" href="update.php?id='.$row['id'].'">Update</a>';
+                                    echo '<a class="btn btn-success" href="disc_player_update.php?id='.$row['id'].'">Update</a>';
                                     echo ' ';
-                                    echo '<a class="btn btn-danger" href="delete.php?id='.$row['id'].'">Delete</a>';
+                                    echo '<a class="btn btn-danger" href="disc_player_delete.php?id='.$row['id'].'">Delete</a>';
                                 }
                                 echo '</td>';
                                 echo '</tr>';
