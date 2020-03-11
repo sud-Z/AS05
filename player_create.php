@@ -119,7 +119,7 @@ if ( !empty($_POST)) { // if not first time through
 		$_SESSION['player_fname'] = $data['fname'];
 		
 		Database::disconnect();
-		header("Location: home.php");
+		header("Location: disc_event_list.php");
 	}
 }
 
@@ -207,7 +207,7 @@ if ( !empty($_POST)) { // if not first time through
 			  
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">Confirm</button>
-					<a class="btn" href="home.php">Back</a>
+					<a class="btn" href="login.php">Back</a>
 				</div>
 				
 			</form>
