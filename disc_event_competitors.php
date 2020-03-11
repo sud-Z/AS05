@@ -22,19 +22,17 @@
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         # get assignment details
-        $sql = "SELECT disc_rsvp.disc_player_id, players.id, players.fname, players.lname, players.filecontent 
-        FROM disc_rsvp
-        INNER JOIN players ON disc_rsvp.disc_player_id = players.id";
+        $sql = "SELECT * FROM disc_rsvp
+        LEFT JOIN players ON players.id = disc_rsvp.disc_player_id";
         $q = $pdo->prepare($sql);
         $q->execute(array($id));
         $data = $q->fetchAll();
         //print_r ($data);
     
-        /*# get volunteer details
-        $sql = 'SELECT * FROM players where id = ?';
+        /*$sql = 'SELECT * FROM disc_rsvp where disc_event_id = ?';
         $q = $pdo->prepare($sql);
-        $q->execute(array($data['disc_player_id']));
-        $perdata = $q->fetchAll();*/
+        $q->execute(array($id));
+        $iddata = $q->fetchAll()*/
 
         # get event details
         $sql = "SELECT * FROM disc_events where id = ?";
@@ -102,7 +100,7 @@
                       <tbody>
                       <?php
                        foreach ($data as $p) {
-                           if($p['id'] == $id){
+                           if($p['disc_event_id'] == $id){
                                 echo '<tr>';
                                 echo '<td><img width=100 src="data:image/jpeg;base64,'. base64_encode( $p['filecontent']).'"/> </td>'; 
                                 echo '<td>'. $p['fname'] . '</td>';
