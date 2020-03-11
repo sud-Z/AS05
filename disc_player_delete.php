@@ -31,6 +31,9 @@
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		
+		$sql = "DELETE FROM disc_rsvp WHERE disc_player_id = ?";
+		$q = $pdo->prepare($sql);
+		$q->execute(array($id));
 		Database::disconnect();
 		header("Location: login.php");
 	} 
