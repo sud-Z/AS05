@@ -98,7 +98,7 @@ $id = null;
 					  <div class="control-group <?php echo !empty($dateError)?'error':'';?>">
 					    <label class="control-label">Date</label>
 					    <div class="controls">
-					      	<input name="date" type="text"  placeholder="Date" value="<?php echo !empty($disc_event_date)?$disc_event_date:'';?>">
+					      	<input name="date" type="date"  placeholder="Date" value="<?php echo !empty($disc_event_date)?$disc_event_date:'';?>">
 					      	<?php if (!empty($disc_event_dateError)): ?>
 					      		<span class="help-inline"><?php echo $disc_event_dateError;?></span>
 					      	<?php endif; ?>
@@ -107,7 +107,7 @@ $id = null;
 					  <div class="control-group <?php echo !empty($disc_event_timeError)?'error':'';?>">
 					    <label class="control-label">Time</label>
 					    <div class="controls">
-					      	<input name="time" type="text" placeholder="Time" value="<?php echo !empty($disc_event_time)?$disc_event_time:'';?>">
+					      	<input name="time" type="time" placeholder="Time" value="<?php echo !empty($disc_event_time)?$disc_event_time:'';?>">
 					      	<?php if (!empty($disc_event_timeError)): ?>
 					      		<span class="help-inline"><?php echo $disc_event_timeError;?></span>
 					      	<?php endif;?>
