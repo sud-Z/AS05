@@ -10,15 +10,15 @@ session_start();
 	
 require 'database.php';
 
-if ( !empty($_POST)) { // if not first time through
-
+if ( !empty($_POST) ) { // if not first time through
+    //if ( !empty($_FILES['userfile']['tmp_name'])) {
 	// initialize user input validation variables
 	$fnameError = null;
 	$lnameError = null;
 	$emailError = null;
 	$mobileError = null;
 	$passwordError = null;
-	$pictureError = null; // not used
+	$pictureError = null; 
 	
 	// initialize $_POST variables
 	$fname = $_POST['fname'];
@@ -30,11 +30,29 @@ if ( !empty($_POST)) { // if not first time through
 	//$picture = $_POST['picture']; // not used
 	
 	// initialize $_FILES variables
-	 $fileName = $_FILES['userfile']['name'];
-	 $tmpName  = $_FILES['userfile']['tmp_name'];
-	 $fileSize = $_FILES['userfile']['size'];
-     $fileType = $_FILES['userfile']['type'];
-	 $content = file_get_contents($tmpName);
+	if(!empty($_FILES['userfile']['tmp_name'])){
+	    $fileName = $_FILES['userfile']['name'];
+	    $tmpName  = $_FILES['userfile']['tmp_name'];
+    	$fileSize = $_FILES['userfile']['size'];
+        $fileType = $_FILES['userfile']['type'];
+	    $content = file_get_contents($tmpName);
+	    
+	        // restrict file types for upload
+	    $types = array('image/jpeg','image/gif','image/png');
+	    if($fileSize > 0) {
+	    	if(in_array($_FILES['userfile']['type'], $types)) {
+	    	}
+	    	else {
+		    	$fileName = null;
+			    $fileType = null;
+			    $fileSize = null;
+			    $fileContent = null;
+    			$pictureError = 'improper file type';
+	    		$valid=false;
+			
+		    }
+    	}
+	}
     
 	// validate user input
 	$valid = true;
@@ -44,6 +62,10 @@ if ( !empty($_POST)) { // if not first time through
 	}
 	if (empty($lname)) {
 		$lnameError = 'Please enter Last Name';
+		$valid = false;
+	}
+	if (empty($fileName)) {
+		$pictureError = 'Please Submit a picture';
 		$valid = false;
 	}
 	// do not allow 2 records with same email address!
@@ -84,21 +106,7 @@ if ( !empty($_POST)) { // if not first time through
 		$passwordError = 'Please enter valid Password';
 		$valid = false;
 	}
-	// restrict file types for upload
-	$types = array('image/jpeg','image/gif','image/png');
-	if($fileSize > 0) {
-		if(in_array($_FILES['userfile']['type'], $types)) {
-		}
-		else {
-			$fileName = null;
-			$fileType = null;
-			$fileSize = null;
-			$fileContent = null;
-			$pictureError = 'improper file type';
-			$valid=false;
-			
-		}
-	}
+	
 	// insert data
 	if ($valid) 
 	{
@@ -122,6 +130,8 @@ if ( !empty($_POST)) { // if not first time through
 		header("Location: disc_event_list.php");
 	}
 }
+
+//}
 
 
 
@@ -200,7 +210,10 @@ if ( !empty($_POST)) { // if not first time through
 					<label class="control-label">Picture</label>
 					<div class="controls">
 						<input type="hidden" name="MAX_FILE_SIZE" value="16000000">
-						<input name="userfile" type="file" id="userfile">
+						<input name="userfile" type="file" id="userfile" value="<?php echo !empty($fname)?$fname:'';?>">
+						<?php if (!empty($pictureError)): ?>
+							<span class="help-inline"><?php echo $pictureError;?></span>
+						<?php endif;?>
 						
 					</div>
 				</div>
